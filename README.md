@@ -1,8 +1,6 @@
-
-
 # Dragnipur-v2.0 AssaultCube Internal Aimbot/ESP/MultiHack
 
-![p8fZwZx[1].png](https://bitbucket.org/repo/7B4g7E/images/1185043425-p8fZwZx%5B1%5D.png)
+![Screenshot_3.png](https://bitbucket.org/repo/B4pn7b/images/799256167-Screenshot_3.png)
 
 ## What does this do?
 
