@@ -32,7 +32,6 @@ struct vec
 	float magnitude() const { return sqrtf(squaredlen()); }
 	vec &normalize() { div(magnitude()); return *this; }
 
-
 	float dist(const vec &e) const { vec t; return dist(e, t); }
 	float dist(const vec &e, vec &t) const { t = *this; t.sub(e); return t.magnitude(); }
 
@@ -74,14 +73,12 @@ struct vec
 	vec scaleFixedPoint(float scalex, float scaley, vec fixedPoint)
 	{
 		vec newVec;
-		
+
 		newVec.x = x * scalex + fixedPoint.x*(1 - scalex);
 		newVec.y = y * scaley + fixedPoint.y*(1 - scaley);
 		return newVec;
 	}
-
 };
-
 
 struct vec2
 {
@@ -93,7 +90,6 @@ struct vec2
 		x = x * scale + fixedPoint.x*(1 - scale);
 		y = y * scale + fixedPoint.y*(1 - scale);
 	}
-
 };
 
 struct vec4
@@ -108,7 +104,7 @@ struct vec4
 	explicit vec4(const vec &p, float w = 0) : x(p.x), y(p.y), z(p.z), w(w) {}
 	vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
-	float &operator[](int i)       { return v[i]; }
+	float &operator[](int i) { return v[i]; }
 	float  operator[](int i) const { return v[i]; }
 };
 
@@ -248,7 +244,6 @@ struct glmatrixf
 		return p.x*v[3] + p.y*v[7] + p.z*v[11] + v[15];
 	}
 
-
 	//assault cube super optimized code, I may use this in the future.
 	//same output as vec normalizedDeviceCoordinates = math2.transform(glmvpmatrix, player.ent->vCenterOfPlayer);
 	//multiply by model view projection matrix = clip coordinates then divide by w to get NormalizedDeviceCoordinates
@@ -258,13 +253,12 @@ struct glmatrixf
 			matrix->transformy(totransform),
 			matrix->transformz(totransform)).div(matrix->transformw(totransform));
 	}
-	
+
 	////vPlayerLoc should be the exact center of the enemy model for scaling to work properly
 	////multiply by model view projection matrix = clip coordinates then divide by w to get NormalizedDeviceCoordinates
 
 	vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc)
 	{
-		
 		//Matrix-Vector Product, multiplying world(eye) coordinates by projection matrix = clipCoords
 		vec4 clipCoords;
 		clipCoords.x = vPlayerLoc.x*mvpmatrix->v[0] + vPlayerLoc.y*mvpmatrix->v[4] + (vPlayerLoc.z)*mvpmatrix->v[8] + mvpmatrix->v[12];
@@ -290,12 +284,11 @@ struct glmatrixf
 
 		return playerScreenCoords;
 	}
-	
+
 	vec gettranslation() const
 	{
 		return vec(v[12], v[13], v[14]);
 	}
-
 }math2;
 
 //MFD
@@ -311,8 +304,8 @@ float Get3dDistance(vec to, vec from)
 	return (float)
 		(sqrt(
 		((to.x - from.x) * (to.x - from.x)) +
-		((to.y - from.y) * (to.y - from.y)) +
-		((to.z - from.z) * (to.z - from.z))
+			((to.y - from.y) * (to.y - from.y)) +
+			((to.z - from.z) * (to.z - from.z))
 		));
 }
 
@@ -333,7 +326,7 @@ float DifferenceOfAngles(vec to, vec from)
 
 	vdifference.y = from.y - to.y;
 	vdifference.x = from.x - to.x;
-	
+
 	//normalize by making them positive values if they are negative
 	if (vdifference.y < 0)
 	{

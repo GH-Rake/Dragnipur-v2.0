@@ -64,7 +64,6 @@ public:
 		glRasterPos2f(xpos, ypos);
 	}
 
-
 	void DrawMenu()
 	{
 		std::vector <std::string> functions;
@@ -95,7 +94,6 @@ public:
 			functions.push_back("[INS] Hide Menu");
 		}
 
-
 		//Get Menu width
 		std::string longest = functions[0];
 		for each (std::string s in functions)
@@ -111,7 +109,6 @@ public:
 			menuWidth = (sHeader.length() * textWidth) + buffW;
 		}
 		else menuWidth = (longest.length() * textWidth) + buffW;
-
 
 		MyRect header1;
 		header1.tl = { float(WINDOWWIDTH * .65 - menuWidth / 2),float(WINDOWHEIGHT * .01) };
@@ -133,7 +130,6 @@ public:
 		glDisable(GL_DEPTH_TEST);
 		renderText(sHeader, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
 		glEnable(GL_DEPTH_TEST);
-
 
 		MyRect tab1;//tab1
 		tab1.tl = { left, header1.bl.y + outlineWidth };
@@ -170,19 +166,18 @@ public:
 		glDisable(GL_DEPTH_TEST);
 		renderText(sTab2, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
 
-
 		//draw Selected tab
 		vec2 coverupleft, coverupright;
 
 		if (iTab == 2)
 		{
-			coverupleft		= { tab2.bl.x,				tab2.bl.y + 1.0f };
-			coverupright	= { tab2.br.x + 1.0f,		tab2.br.y + 1.0f };
+			coverupleft = { tab2.bl.x,				tab2.bl.y + 1.0f };
+			coverupright = { tab2.br.x + 1.0f,		tab2.br.y + 1.0f };
 		}
 		else //tab1
 		{
-			coverupleft		= { tab1.bl.x + 1.0f,			tab1.bl.y + 1.0f };
-			coverupright	= { tab1.br.x,					tab1.br.y + 1.0f };
+			coverupleft = { tab1.bl.x + 1.0f,			tab1.bl.y + 1.0f };
+			coverupright = { tab1.br.x,					tab1.br.y + 1.0f };
 		}
 		vec2 lines[2] = { coverupleft, coverupright };
 
@@ -194,7 +189,6 @@ public:
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glPopMatrix();
 		glEnable(GL_DEPTH_TEST);
-
 
 		MyRect body1;
 		body1.tl = { left, tab1.bl.y + outlineWidth };
@@ -243,5 +237,4 @@ public:
 
 		glPopMatrix();
 	}
-
 }menu;

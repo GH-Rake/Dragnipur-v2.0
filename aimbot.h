@@ -117,7 +117,6 @@ public:
 				DWORD old_protect;
 				if (aBot.bMapHack)
 				{
-
 					//bypass gameMode checking
 					VirtualProtect((void*)0x0040968F, 6, PAGE_EXECUTE_READWRITE, &old_protect);
 					memcpy((void*)0x0040968F, (PBYTE)("\x90\x90\x90\x90\x90\x90"), 6);
@@ -187,7 +186,6 @@ public:
 					VirtualProtect((void*)0x463CEB, 5, old_protect, &old_protect);
 				}
 			}
-
 
 			//fullbright
 			if (GetAsyncKeyState(VK_F6) & 1)
@@ -270,7 +268,6 @@ public:
 				}
 			}
 
-
 			//Flag teleporter
 			if (GetAsyncKeyState(VK_F11) & 1 && m_flags)
 			{
@@ -299,7 +296,6 @@ public:
 
 				switch (myFlag->state)
 				{
-
 				case INBASE:
 					if (enemyFlag->state == INBASE)
 					{
@@ -314,7 +310,7 @@ public:
 
 				case DROPPED:
 					localPlayer->vLocation = myFlag->pos;
-					//how to find flag?  is 
+					//how to find flag?  is
 					break;
 				}
 			}

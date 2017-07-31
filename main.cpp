@@ -3,7 +3,6 @@
 #include "internalIncludes.h"
 #include <Windows.h>
 
-
 //drawHUD function to hook:
 typedef void(__cdecl *gl_drawHUD) (int w, int h, int curfps, int nquads, int curvert, bool underwater);
 gl_drawHUD drawTheHUD;
@@ -38,7 +37,6 @@ void shootThread()
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
 	}
 }
 
@@ -76,13 +74,13 @@ BOOL __stdcall DllMain(HINSTANCE hModule, DWORD dwReason, LPVOID lpReserved)
 		break;
 
 	case DLL_PROCESS_DETACH:
-		
+
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
 		DetourDetach(&(PVOID &)owglSwapBuffers, hwglSwapBuffers);
 		DetourDetach(&(PVOID&)drawTheHUD, hackMain);
 		DetourTransactionCommit();
-		
+
 		break;
 
 	default:

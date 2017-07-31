@@ -13,7 +13,7 @@ enum gameModes
 	DEATHMATCH,
 	SURVIVOR,
 	TEAMSURVIVOR,
-	CTF, 
+	CTF,
 	PISTOLFRENZY,
 	BOTTEAMDEATHMATCH,
 	BOTDEATHMATCH,
@@ -66,11 +66,11 @@ class weapon
 {
 public:
 	char pad_0x0000[0x4]; //0x0000
-	__int32 ID; //0x0004 
-	playerent * owner; //0x0008 
-	DWORD * guninfo; //0x000C 
-	int * ammo2; //0x0010 
-	int * ammo; //0x0014 
+	__int32 ID; //0x0004
+	playerent * owner; //0x0008
+	DWORD * guninfo; //0x000C
+	int * ammo2; //0x0010
+	int * ammo; //0x0014
 	int * gunWait;
 	int shots;
 	int breload;
@@ -80,24 +80,24 @@ class playerent
 {
 public:
 	char _0x0000[4];
-	vec vHead; //0x0004 
+	vec vHead; //0x0004
 	char _0x0010[36];
-	vec vLocation; //0x0034 
-	vec vViewAngle; //0x0040 
+	vec vLocation; //0x0034
+	vec vViewAngle; //0x0040
 	char _0x004C[37];
-	BYTE bScoping; //0x0071 
+	BYTE bScoping; //0x0071
 	char _0x0072[134];
-	__int32 health; //0x00F8 
-	__int32 armor; //0x00FC 
+	__int32 health; //0x00F8
+	__int32 armor; //0x00FC
 	char _0x0100[292];
-	BYTE bAttacking; //0x0224 
-	char name[16]; //0x0225 
+	BYTE bAttacking; //0x0224
+	char name[16]; //0x0225
 	char _0x0235[247];
-	BYTE team; //0x032C 
+	BYTE team; //0x032C
 	char _0x032D[11];
-	BYTE state; //0x0338 
+	BYTE state; //0x0338
 	char _0x0339[59];
-	weapon* weapon; //0x0374 
+	weapon* weapon; //0x0374
 	char _0x0378[520];
 };
 
@@ -109,7 +109,7 @@ public:
 	float dist;
 	float fAngleFromCross;
 
-	PlayerClass(){	}
+	PlayerClass() {	}
 
 	//playerVector constructor
 	PlayerClass(DWORD * player)
@@ -131,16 +131,16 @@ struct traceresult_s
 	bool collided;
 };
 
-bool PlayerClass::IsVisible()
+/*
+//void __usercall TraceLine(traceresult_s *pTraceResults@<eax>, vec from, vec to, DWORD *dynent, bool bCheckPlayers, char skipTags)
+__declspec(naked) void pTraceLine()
 {
-	DWORD traceLine = 0x048a310;
-	traceresult_s traceresult;
-	traceresult.collided = false;
-	vec from = localPlayer->vHead;
-	vec to = ent->vHead;
-
 	__asm
 	{
+		//
+		mov eax, pTraceResults;
+
+		//
 		push 0; bSkipTags
 			push 0; bCheckPlayers
 			push localPlayer
@@ -152,7 +152,64 @@ bool PlayerClass::IsVisible()
 			push from.x
 			lea eax, [traceresult]
 			call traceLine;
-			add esp, 36
+		add esp, 36
+	}
+}
+
+//this function will be a wrapper around the above function
+bool traceline2(traceresult_s *pTraceResults, vec from, vec to, DWORD *dynent, bool bCheckPlayers, char skipTags)
+{
+	DWORD traceLine = 0x048a310;
+	traceresult_s traceresult;
+	traceresult.collided = false;
+	vec from = localPlayer->vHead;
+	vec to = ent->vHead;
+
+	__asm
+	{
+		//
+		mov eax, pTraceResults;
+
+		//
+		push 0; bSkipTags
+		push 0; bCheckPlayers
+		push localPlayer
+		push to.z
+		push to.y
+		push to.x
+		push from.z
+		push from.y
+		push from.x
+		lea eax, [traceresult]
+		call traceLine;
+		add esp, 36
+	}
+	return !traceresult.collided;
+}
+*/
+
+bool PlayerClass::IsVisible()
+{
+	DWORD traceLine = 0x048a310;
+	traceresult_s traceresult;
+	traceresult.collided = false;
+	vec from = localPlayer->vHead;
+	vec to = ent->vHead;
+
+	__asm
+	{
+		push 0; bSkipTags
+		push 0; bCheckPlayers
+		push localPlayer
+		push to.z
+		push to.y
+		push to.x
+		push from.z
+		push from.y
+		push from.x
+		lea eax, [traceresult]
+		call traceLine;
+		add esp, 36
 	}
 	return !traceresult.collided;
 }
@@ -160,38 +217,35 @@ bool PlayerClass::IsVisible()
 class mapEnt
 {
 public:
-	__int16 x; //0x0000 
-	__int16 y; //0x0002 
-	__int16 z; //0x0004 
-	__int16 attr1; //0x0006 
-	unsigned char type; //0x0008 
-	unsigned char attr2; //0x0009 
-	unsigned char attr3; //0x000A 
-	unsigned char attr4; //0x000B 
-	unsigned char bSpawned; //0x000C 
-	int lastmillis; //0x000D 
+	__int16 x; //0x0000
+	__int16 y; //0x0002
+	__int16 z; //0x0004
+	__int16 attr1; //0x0006
+	unsigned char type; //0x0008
+	unsigned char attr2; //0x0009
+	unsigned char attr3; //0x000A
+	unsigned char attr4; //0x000B
+	unsigned char bSpawned; //0x000C
+	int lastmillis; //0x000D
 	unsigned char padding[3];
-
 };//Size=0x0014
 
 class flagEnt
 {
 public:
-	__int32 team; //0x0000 
-	mapEnt* mapent; //0x0004 
-	__int32 number; //0x0008 
-	playerent* player; //0x000C 
-	vec pos; //0x0010 
-	__int32 state; //0x001C 
-	__int32 unknown2; //0x0020 
-
+	__int32 team; //0x0000
+	mapEnt* mapent; //0x0004
+	__int32 number; //0x0008
+	playerent* player; //0x000C
+	vec pos; //0x0010
+	__int32 state; //0x001C
+	__int32 unknown2; //0x0020
 };//Size=0x0024
 
 class flagArray
 {
 public:
-	flagEnt flags[2]; //0x0000 
-
+	flagEnt flags[2]; //0x0000
 };//Size=0x0048
 
 struct sqr

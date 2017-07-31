@@ -29,7 +29,6 @@ void esp(PlayerClass p)
 		glColor3ub(255, 0, 0);//red
 	}
 
-
 	MyRect healthBarRed;
 
 	//put center vertex to the right
@@ -78,7 +77,6 @@ void esp(PlayerClass p)
 	{
 		float difference = boxWidth - textWidth;
 		textX = box.tl.x + (difference / 2);
-
 	}
 
 	if (textWidth >= boxWidth)
@@ -87,7 +85,7 @@ void esp(PlayerClass p)
 		textX = box.tl.x - (difference / 2);
 	}
 
-	textY = box.tl.y -4;
+	textY = box.tl.y - 4;
 
 	renderText(p.ent->name, GLUT_BITMAP_8_BY_13, textX, textY);
 
@@ -122,7 +120,7 @@ void esp(mapEnt * e, std::string text)
 	float scale = (400 / dist) * fWindowScale;
 	box.scale(scale);
 
-	drawRectangle(box,2);
+	drawRectangle(box, 2);
 
 	//text render:
 	float boxWidth = box.tr.x - box.tl.x;
@@ -139,7 +137,7 @@ void esp(mapEnt * e, std::string text)
 		float difference = textWidth - boxWidth;
 		textX = box.tl.x - (difference / 2);
 	}
-	textY = box.tl.y -4;
+	textY = box.tl.y - 4;
 	renderText(text, GLUT_BITMAP_8_BY_13, textX, textY);
 }
 
@@ -180,10 +178,9 @@ void esp(vec e)
 		float difference = textWidth - boxWidth;
 		textX = box.tl.x - (difference / 2);
 	}
-	textY = float(box.tl.y) -4;
+	textY = float(box.tl.y) - 4;
 	renderText(text, GLUT_BITMAP_8_BY_13, textX, textY);
 }
-
 
 void espPlayers(std::vector<PlayerClass> playerVector)
 {
@@ -198,18 +195,17 @@ void espPlayers(std::vector<PlayerClass> playerVector)
 	}
 }
 
-
 void espMapEnts()
 {
 	int numOfEnts = *(int*)0x510120;
 	for (int i = 0; i < numOfEnts; i++)
 	{
-		DWORD temp = *(DWORD*)(0x510118);
+		DWORD temp = *(DWORD*)(0x510118); //mapent list ptr?
 		mapEnt * e = (mapEnt*)(temp + i * 0x14);
 
 		if (e->bSpawned == 1)
 		{
-			if (glmvpmatrix->transformw(vec(e->x, e->y, e->z)) < 0.1f)	{ continue; }
+			if (glmvpmatrix->transformw(vec(e->x, e->y, e->z)) < 0.1f) { continue; }
 
 			switch (e->type)
 			{
@@ -260,14 +256,14 @@ void espFlags()
 
 		if (flag->state == STOLEN)
 		{
-			if (glmvpmatrix->transformw(flag->player->vLocation) < 0.1f)	{ continue; }
+			if (glmvpmatrix->transformw(flag->player->vLocation) < 0.1f) { continue; }
 
 			esp(flag->player->vLocation);
 		}
 
 		else if (flag->state == INBASE || DROPPED)
 		{
-			if (glmvpmatrix->transformw(flag->pos) < 0.1f)	{ continue; }
+			if (glmvpmatrix->transformw(flag->pos) < 0.1f) { continue; }
 
 			esp(flag->pos);
 		}

@@ -6,8 +6,6 @@ class MyRect
 public:
 	vec2 tl, tr, br, bl, center; //top left, top right, bottom right, bottom left etc...
 
-
-
 	//equal dimension scaling
 	void scale(float scale)
 	{
@@ -25,6 +23,6 @@ public:
 	tr = tr.scaleFixedPoint(scalex, scaley, center);
 	br = br.scaleFixedPoint(scalex, scaley, center);
 	bl = bl.scaleFixedPoint(scalex, scaley, center);
-	}	
+	}
 	*/
 };

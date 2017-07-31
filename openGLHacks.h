@@ -30,7 +30,6 @@ BOOL WINAPI hwglSwapBuffers(_In_ HDC hDc)
 			espMapEnts();
 		}
 
-
 		if (m_flags)
 		{
 			espFlags();
