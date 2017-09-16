@@ -47,10 +47,12 @@ public:
 			target = targets[0];
 			localPlayer->vViewAngle = target.vAimbotAngles;
 
+			/* buggy auto shoot
 			if (*localPlayer->weapon->gunWait == 0 && localPlayer->weapon->breload == false)
 			{
 				bShooting = TRUE;
 			}
+			*/
 		}
 	}
 
@@ -223,7 +225,7 @@ public:
 				if (aBot.bFlyHackStatus)
 				{
 					VirtualProtect((void*)0x45ADD8, 1, PAGE_EXECUTE_READWRITE, &old_protect);
-					*(byte *)0x45ADD8 = 1;
+					*(BYTE *)0x45ADD8 = 1;
 					VirtualProtect((void*)0x45ADD8, 1, old_protect, &old_protect);
 					menu.sFlyHackStatus = "ON";
 				}
@@ -232,7 +234,7 @@ public:
 				{
 					//restore
 					VirtualProtect((void*)0x45ADD8, 1, PAGE_EXECUTE_READWRITE, &old_protect);
-					*(byte *)0x45ADD8 = 0;
+					*(BYTE *)0x45ADD8 = 0;
 					VirtualProtect((void*)0x45ADD8, 1, old_protect, &old_protect);
 					menu.sFlyHackStatus = "OFF";
 				}
@@ -248,7 +250,8 @@ public:
 				localPlayer->vLocation = teleport;
 			}
 
-			//TeleKill
+			//TeleKill = BUGGED = removed
+			/*
 			if (GetAsyncKeyState(VK_F10))
 			{
 				targets.clear();
@@ -264,9 +267,10 @@ public:
 				for each (PlayerClass p in targets)
 				{
 					localPlayer->vLocation = p.ent->vLocation;
-					bShooting = TRUE;
+					bShooting = true;
 				}
 			}
+			*/
 
 			//Flag teleporter
 			if (GetAsyncKeyState(VK_F11) & 1 && m_flags)

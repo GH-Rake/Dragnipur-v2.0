@@ -55,7 +55,7 @@ DWORD WINAPI Dragnipur(LPVOID param)
 	std::thread shootThread(shootThread);
 	shootThread.detach();
 
-	//disable annoying keybinds:
+	//disable annoying ws:
 	DWORD old_protect;
 	VirtualProtect((void*)0x045F920, 6, PAGE_EXECUTE_READWRITE, &old_protect);
 	memset((void*)(0x045F920), 0x90, 6);

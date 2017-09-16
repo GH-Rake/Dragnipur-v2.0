@@ -34,7 +34,6 @@ void esp(PlayerClass p)
 	//put center vertex to the right
 	healthBarRed.center.x = float(screenCoords.x + HALF_PLAYER_WIDTH * 1.3 * 400 / p.dist * fWindowScale);
 	healthBarRed.center.y = screenCoords.y;
-	//healthBarRed.center.z = 0;
 
 	//create a hbar out of the vector
 	//X part changes width of healthbar, Y stays same as ESP box
@@ -49,7 +48,6 @@ void esp(PlayerClass p)
 	//put center vertex to the right
 	healthBarGreen.center.x = float(screenCoords.x + HALF_PLAYER_WIDTH * 1.3 * 400 / p.dist * fWindowScale);
 	healthBarGreen.center.y = screenCoords.y;
-	//healthBarGreen.center.z = 0;
 
 	//create a hbar out of the vector
 	healthBarGreen.tl = { healthBarGreen.center.x - 0.15f, healthBarGreen.center.y - float(PLAYER_HEIGHT / 2) * p.ent->health / 100 };
