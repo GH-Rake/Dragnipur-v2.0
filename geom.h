@@ -8,9 +8,8 @@ struct vec
 	vec() { x = y = z = 0; }
 	vec(float a, float b, float c) : x(a), y(b), z(c) {}
 	vec(float *v) : x(v[0]), y(v[1]), z(v[2]) {}
-
+	
 	bool iszero() const { return x == 0 && y == 0 && z == 0; }
-
 	bool operator==(const vec &o) const { return x == o.x && y == o.y && z == o.z; }
 	bool operator!=(const vec &o) const { return x != o.x || y != o.y || z != o.z; }
 	vec operator-() const { return vec(-x, -y, -z); }
@@ -41,24 +40,6 @@ struct vec
 	vec &cross(const vec &a, const vec &b) { x = a.y*b.z - a.z*b.y; y = a.z*b.x - a.x*b.z; z = a.x*b.y - a.y*b.x; return *this; }
 	float cxy(const vec &a) { return x*a.y - y*a.x; }
 
-	void rotate_around_z(float angle) { *this = vec(cosf(angle)*x - sinf(angle)*y, cosf(angle)*y + sinf(angle)*x, z); }
-	void rotate_around_x(float angle) { *this = vec(x, cosf(angle)*y - sinf(angle)*z, cosf(angle)*z + sinf(angle)*y); }
-	void rotate_around_y(float angle) { *this = vec(cosf(angle)*x - sinf(angle)*z, y, cosf(angle)*z + sinf(angle)*x); }
-
-	vec &rotate(float angle, const vec &d)
-	{
-		float c = cosf(angle), s = sinf(angle);
-		return rotate(c, s, d);
-	}
-
-	vec &rotate(float c, float s, const vec &d)
-	{
-		*this = vec(x*(d.x*d.x*(1 - c) + c) + y*(d.x*d.y*(1 - c) - d.z*s) + z*(d.x*d.z*(1 - c) + d.y*s),
-			x*(d.y*d.x*(1 - c) + d.z*s) + y*(d.y*d.y*(1 - c) + c) + z*(d.y*d.z*(1 - c) - d.x*s),
-			x*(d.x*d.z*(1 - c) - d.y*s) + y*(d.y*d.z*(1 - c) + d.x*s) + z*(d.z*d.z*(1 - c) + c));
-		return *this;
-	}
-
 	//scale vec at a fixed point with equal dimension for screen drawing
 	vec scaleFixedPoint(float scale, vec fixedPoint)
 	{
@@ -80,6 +61,7 @@ struct vec
 	}
 };
 
+
 struct vec2
 {
 	float x, y;
@@ -91,6 +73,7 @@ struct vec2
 		y = y * scale + fixedPoint.y*(1 - scale);
 	}
 };
+
 
 struct vec4
 {
@@ -115,39 +98,6 @@ struct glmatrixf
 	float operator[](int i) const { return v[i]; }
 	float &operator[](int i) { return v[i]; }
 
-#define ROTVEC(A, B) \
-		    { \
-        float a = A, b = B; \
-        A = a*c + b*s; \
-        B = b*c - a*s; \
-		    }
-
-	void rotate_around_x(float angle)
-	{
-		float c = cosf(angle), s = sinf(angle);
-		ROTVEC(v[4], v[8]);
-		ROTVEC(v[5], v[9]);
-		ROTVEC(v[6], v[10]);
-	}
-
-	void rotate_around_y(float angle)
-	{
-		float c = cosf(angle), s = sinf(angle);
-		ROTVEC(v[8], v[0]);
-		ROTVEC(v[9], v[1]);
-		ROTVEC(v[10], v[2]);
-	}
-
-	void rotate_around_z(float angle)
-	{
-		float c = cosf(angle), s = sinf(angle);
-		ROTVEC(v[0], v[4]);
-		ROTVEC(v[1], v[5]);
-		ROTVEC(v[2], v[6]);
-	}
-
-#undef ROTVEC
-
 #define MULMAT(row, col) v[col + row] = x[row]*y[col] + x[row + 4]*y[col + 1] + x[row + 8]*y[col + 2] + x[row + 12]*y[col + 3];
 
 	template<class XT, class YT>
@@ -159,61 +109,13 @@ struct glmatrixf
 		MULMAT(0, 12); MULMAT(1, 12); MULMAT(2, 12); MULMAT(3, 12);
 	}
 
+	
+
 #undef MULMAT
 
 	void mul(const glmatrixf &x, const glmatrixf &y)
 	{
 		mul(x.v, y.v);
-	}
-
-	void identity()
-	{
-		static const float m[16] =
-		{
-			1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		};
-		memcpy(v, m, sizeof(v));
-	}
-
-	void translate(float x, float y, float z)
-	{
-		v[12] += x;
-		v[13] += y;
-		v[14] += z;
-	}
-
-	void translate(const vec &o)
-	{
-		translate(o.x, o.y, o.z);
-	}
-
-	void scale(float x, float y, float z)
-	{
-		v[0] *= x; v[1] *= x; v[2] *= x; v[3] *= x;
-		v[4] *= y; v[5] *= y; v[6] *= y; v[7] *= y;
-		v[8] *= z; v[9] *= z; v[10] *= z; v[11] *= z;
-	}
-
-	void invertnormal(vec &dir) const
-	{
-		vec n(dir);
-		dir.x = n.x*v[0] + n.y*v[1] + n.z*v[2];
-		dir.y = n.x*v[4] + n.y*v[5] + n.z*v[6];
-		dir.z = n.x*v[8] + n.y*v[9] + n.z*v[10];
-	}
-
-	void invertvertex(vec &pos) const
-	{
-		vec p(pos);
-		p.x -= v[12];
-		p.y -= v[13];
-		p.z -= v[14];
-		pos.x = p.x*v[0] + p.y*v[1] + p.z*v[2];
-		pos.y = p.x*v[4] + p.y*v[5] + p.z*v[6];
-		pos.z = p.x*v[8] + p.y*v[9] + p.z*v[10];
 	}
 
 	void transform(const vec &in, vec4 &out) const
@@ -244,9 +146,7 @@ struct glmatrixf
 		return p.x*v[3] + p.y*v[7] + p.z*v[11] + v[15];
 	}
 
-	//assault cube super optimized code, I may use this in the future.
-	//same output as vec normalizedDeviceCoordinates = math2.transform(glmvpmatrix, player.ent->vCenterOfPlayer);
-	//multiply by model view projection matrix = clip coordinates then divide by w to get NormalizedDeviceCoordinates
+	//assault cube super code
 	vec transform(glmatrixf *matrix, vec &totransform)
 	{
 		return vec(matrix->transformx(totransform),
@@ -254,8 +154,7 @@ struct glmatrixf
 			matrix->transformz(totransform)).div(matrix->transformw(totransform));
 	}
 
-	////vPlayerLoc should be the exact center of the enemy model for scaling to work properly
-	////multiply by model view projection matrix = clip coordinates then divide by w to get NormalizedDeviceCoordinates
+	////multiply by model view projection matrix = clip coordinates then divide by w to get ndc
 
 	vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc)
 	{
@@ -266,11 +165,11 @@ struct glmatrixf
 		clipCoords.z = vPlayerLoc.x*mvpmatrix->v[2] + vPlayerLoc.y*mvpmatrix->v[6] + (vPlayerLoc.z)*mvpmatrix->v[10] + mvpmatrix->v[14];
 		clipCoords.w = vPlayerLoc.x*mvpmatrix->v[3] + vPlayerLoc.y*mvpmatrix->v[7] + (vPlayerLoc.z)*mvpmatrix->v[11] + mvpmatrix->v[15];
 
-		//perspective division, dividing by clip.W = NDC
-		vec normalizedDeviceCoordinates;
-		normalizedDeviceCoordinates.x = clipCoords.x / clipCoords.w;
-		normalizedDeviceCoordinates.y = clipCoords.y / clipCoords.w;
-		normalizedDeviceCoordinates.z = clipCoords.z / clipCoords.w;
+		//perspective division, dividing by clip.W = NDC = Normalized Device Coordinates
+		vec ndc;
+		ndc.x = clipCoords.x / clipCoords.w;
+		ndc.y = clipCoords.y / clipCoords.w;
+		ndc.z = clipCoords.z / clipCoords.w;
 
 		//viewport tranform to screenCooords
 		GLfloat viewport[4] = { 0 };
@@ -279,9 +178,8 @@ struct glmatrixf
 		glGetFloatv(GL_DEPTH_RANGE, depthrange); //depthrange = (0,1)
 
 		vec2 playerScreenCoords;
-		playerScreenCoords.x = (viewport[2] / 2 * normalizedDeviceCoordinates.x) + (normalizedDeviceCoordinates.x + viewport[2] / 2);
-		playerScreenCoords.y = -(viewport[3] / 2 * normalizedDeviceCoordinates.y) + (normalizedDeviceCoordinates.y + viewport[3] / 2);
-
+		playerScreenCoords.x = (viewport[2] / 2 * ndc.x) + (ndc.x + viewport[2] / 2);
+		playerScreenCoords.y = -(viewport[3] / 2 * ndc.y) + (ndc.y + viewport[3] / 2);
 		return playerScreenCoords;
 	}
 
@@ -290,14 +188,6 @@ struct glmatrixf
 		return vec(v[12], v[13], v[14]);
 	}
 }math2;
-
-//MFD
-float distxy(vec src, vec dst)
-{
-	float dx = dst.x - src.x;
-	float dy = dst.y - src.y;
-	return sqrtf(dx*dx + dy*dy);
-}
 
 float Get3dDistance(vec to, vec from)
 {

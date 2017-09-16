@@ -1,5 +1,4 @@
 #pragma once
-//bool bESP = false;
 int iESP = 0;
 bool bMapEntESP = false;
 enum espMode { OFF = 0, PLAYERSONLY, ALL };

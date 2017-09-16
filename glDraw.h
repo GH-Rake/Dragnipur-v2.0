@@ -45,18 +45,11 @@ void renderText(std::string textString, void* font, float xpos, float ypos)
 
 void drawOutline(MyRect box)
 {
-	//maybe subtract 2 from left and leave right alone
 	box.tl.x -= 1.0f;
 	box.tl.y -= 1.0f;
-
-	//box.tr.x += 1.0f;
 	box.tr.x += 0.5f;
-
 	box.tr.y -= 1.0f;
-
-	//box.br.x += 1.0f;
 	box.br.x += 0.5f;
-
 	box.br.y += 1.0f;
 	box.bl.x -= 1.0f;
 	box.bl.y += 1.0f;

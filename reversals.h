@@ -131,63 +131,6 @@ struct traceresult_s
 	bool collided;
 };
 
-/*
-//void __usercall TraceLine(traceresult_s *pTraceResults@<eax>, vec from, vec to, DWORD *dynent, bool bCheckPlayers, char skipTags)
-__declspec(naked) void pTraceLine()
-{
-	__asm
-	{
-		//
-		mov eax, pTraceResults;
-
-		//
-		push 0; bSkipTags
-			push 0; bCheckPlayers
-			push localPlayer
-			push to.z
-			push to.y
-			push to.x
-			push from.z
-			push from.y
-			push from.x
-			lea eax, [traceresult]
-			call traceLine;
-		add esp, 36
-	}
-}
-
-//this function will be a wrapper around the above function
-bool traceline2(traceresult_s *pTraceResults, vec from, vec to, DWORD *dynent, bool bCheckPlayers, char skipTags)
-{
-	DWORD traceLine = 0x048a310;
-	traceresult_s traceresult;
-	traceresult.collided = false;
-	vec from = localPlayer->vHead;
-	vec to = ent->vHead;
-
-	__asm
-	{
-		//
-		mov eax, pTraceResults;
-
-		//
-		push 0; bSkipTags
-		push 0; bCheckPlayers
-		push localPlayer
-		push to.z
-		push to.y
-		push to.x
-		push from.z
-		push from.y
-		push from.x
-		lea eax, [traceresult]
-		call traceLine;
-		add esp, 36
-	}
-	return !traceresult.collided;
-}
-*/
-
 bool PlayerClass::IsVisible()
 {
 	DWORD traceLine = 0x048a310;
