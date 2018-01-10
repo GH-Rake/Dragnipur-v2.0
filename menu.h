@@ -51,15 +51,12 @@ public:
 	float body = buff + numFunctions * (textHeight + buff) + buff;
 	float footer = header;
 	float outlineWidth = 2;
-
-	void renderLine(std::string textString, void* font, float &xpos, float &ypos)
+	
+	//new
+	void renderLine(std::string textString, float &xpos, float &ypos)
 	{
-		for (std::string::iterator j = textString.begin(); j != textString.end(); ++j)
-		{
-			char c = *j;
-			glutBitmapCharacter(font, c);
-		}
-
+		//font size?
+		font.Print(xpos, ypos, rgb::red, "%s", textString.c_str());
 		ypos += textHeight + buff;
 		glRasterPos2f(xpos, ypos);
 	}
@@ -128,7 +125,9 @@ public:
 		glColor3ub(255, 0, 0);
 		glRasterPos2f(pos.x, pos.y);
 		glDisable(GL_DEPTH_TEST);
-		renderText(sHeader, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
+
+		renderText(sHeader, pos.x, pos.y);
+
 		glEnable(GL_DEPTH_TEST);
 
 		MyRect tab1;//tab1
@@ -146,7 +145,7 @@ public:
 		glColor3ub(255, 0, 0);
 		glRasterPos2f(pos.x, pos.y);
 		glDisable(GL_DEPTH_TEST);
-		renderText(sTab1, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
+		renderText(sTab1, pos.x, pos.y);
 		glEnable(GL_DEPTH_TEST);
 
 		MyRect tab2;
@@ -164,7 +163,7 @@ public:
 		glColor3ub(255, 0, 0);
 		glRasterPos2f(pos.x, pos.y);
 		glDisable(GL_DEPTH_TEST);
-		renderText(sTab2, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
+		renderText(sTab2, pos.x, pos.y);
 
 		//draw Selected tab
 		vec2 coverupleft, coverupright;
@@ -211,7 +210,7 @@ public:
 		glDisable(GL_DEPTH_TEST);
 		for each (std::string string in functions)
 		{
-			renderLine(string, GLUT_BITMAP_9_BY_15, textrasterWidth, textrasterHeight);
+			renderLine(string, textrasterWidth, textrasterHeight); //15 font
 		}
 
 		glEnable(GL_DEPTH_TEST);
@@ -232,7 +231,7 @@ public:
 		glColor3ub(255, 0, 0);
 		glRasterPos2f(pos.x, pos.y);
 		glDisable(GL_DEPTH_TEST);
-		renderText(sFooter, GLUT_BITMAP_9_BY_15, pos.x, pos.y);
+		renderText(sFooter, pos.x, pos.y);
 		glEnable(GL_DEPTH_TEST);
 
 		glPopMatrix();

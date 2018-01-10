@@ -42,9 +42,15 @@
     <ClInclude Include="geom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gltext.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gltext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

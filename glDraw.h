@@ -1,9 +1,21 @@
 #pragma once
+#include "gltext.h"
 
 GLfloat viewport[4] = { 0 };
 GLfloat depthrange[2] = { 0 };
 #define WINDOWWIDTH viewport[2]
 #define WINDOWHEIGHT viewport[3]
+
+namespace rgb
+{
+	const GLubyte red[3] = { 255, 0, 0 };
+	const GLubyte green[3] = { 0, 255, 0 };
+	const GLubyte gray[3] = { 55, 55, 55 };
+	const GLubyte lightgray[3] = { 192, 192, 192 };
+	const GLubyte black[3] = { 0, 0, 0 };
+}
+
+GL::Font font;
 
 //draw rectangle outline
 void drawRectangle(MyRect r, float lineWidth)
@@ -32,16 +44,12 @@ void drawFilledRect(MyRect r)
 	glPopMatrix();
 }
 
-//ESP text
-void renderText(std::string textString, void* font, float xpos, float ypos)
+//NEW:
+void renderText(std::string textString, float xpos, float ypos)
 {
-	glRasterPos2f(xpos, ypos);
-	for (std::string::iterator j = textString.begin(); j != textString.end(); ++j)
-	{
-		char c = *j;
-		glutBitmapCharacter(font, c);
-	}
+	font.Print(xpos, ypos, rgb::red, "%s", textString.c_str());
 }
+
 
 void drawOutline(MyRect box)
 {

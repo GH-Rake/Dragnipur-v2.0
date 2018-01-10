@@ -16,6 +16,12 @@ BOOL WINAPI hwglSwapBuffers(_In_ HDC hDc)
 		*localPlayer->weapon->ammo = 999;
 	}
 
+	HDC currentHDC = wglGetCurrentDC();
+	if (!font.bBuilt || currentHDC != font.hdc)
+	{
+		font.Build(15);
+	}
+
 	if (menu.bStatus)
 	{
 		menu.DrawMenu();

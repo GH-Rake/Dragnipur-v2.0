@@ -84,7 +84,7 @@ void esp(PlayerClass p)
 
 	textY = box.tl.y - 4;
 
-	renderText(p.ent->name, GLUT_BITMAP_8_BY_13, textX, textY);
+	renderText(p.ent->name, textX, textY); //8x13 font size
 
 	//Draw Health Bars
 	glColor3ub(0, 255, 0);//green
@@ -135,7 +135,7 @@ void esp(mapEnt * e, std::string text)
 		textX = box.tl.x - (difference / 2);
 	}
 	textY = box.tl.y - 4;
-	renderText(text, GLUT_BITMAP_8_BY_13, textX, textY);
+	renderText(text, textX, textY); //13 font size
 }
 
 //flags
@@ -176,7 +176,7 @@ void esp(vec e)
 		textX = box.tl.x - (difference / 2);
 	}
 	textY = float(box.tl.y) - 4;
-	renderText(text, GLUT_BITMAP_8_BY_13, textX, textY);
+	renderText(text, textX, textY); //13 font size
 }
 
 void espPlayers(std::vector<PlayerClass> playerVector)

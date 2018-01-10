@@ -23,6 +23,7 @@
     <ClInclude Include="esp.h" />
     <ClInclude Include="geom.h" />
     <ClInclude Include="glDraw.h" />
+    <ClInclude Include="gltext.h" />
     <ClInclude Include="internalIncludes.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="myRect.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="reversals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="gltext.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -41,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -1,5 +1,6 @@
 #pragma once
 #define PI ( 3.1415927f )
+#include <cmath>
 
 struct vec
 {
@@ -61,7 +62,6 @@ struct vec
 	}
 };
 
-
 struct vec2
 {
 	float x, y;
@@ -73,7 +73,6 @@ struct vec2
 		y = y * scale + fixedPoint.y*(1 - scale);
 	}
 };
-
 
 struct vec4
 {
