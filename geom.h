@@ -9,7 +9,7 @@ struct vec
 	vec() { x = y = z = 0; }
 	vec(float a, float b, float c) : x(a), y(b), z(c) {}
 	vec(float *v) : x(v[0]), y(v[1]), z(v[2]) {}
-	
+
 	bool iszero() const { return x == 0 && y == 0 && z == 0; }
 	bool operator==(const vec &o) const { return x == o.x && y == o.y && z == o.z; }
 	bool operator!=(const vec &o) const { return x != o.x || y != o.y || z != o.z; }
@@ -23,11 +23,11 @@ struct vec
 	vec &add(const vec &o) { x += o.x; y += o.y; z += o.z; return *this; }
 	vec &sub(const vec &o) { x -= o.x; y -= o.y; z -= o.z; return *this; }
 
-	float squaredlen() const { return x*x + y*y + z*z; }
-	float sqrxy() const { return x*x + y*y; }
+	float squaredlen() const { return x * x + y * y + z * z; }
+	float sqrxy() const { return x * x + y * y; }
 
-	float dot(const vec &o) const { return x*o.x + y*o.y + z*o.z; }
-	float dotxy(const vec &o) const { return x*o.x + y*o.y; }
+	float dot(const vec &o) const { return x * o.x + y * o.y + z * o.z; }
+	float dotxy(const vec &o) const { return x * o.x + y * o.y; }
 
 	float magnitude() const { return sqrtf(squaredlen()); }
 	vec &normalize() { div(magnitude()); return *this; }
@@ -35,11 +35,11 @@ struct vec
 	float dist(const vec &e) const { vec t; return dist(e, t); }
 	float dist(const vec &e, vec &t) const { t = *this; t.sub(e); return t.magnitude(); }
 
-	float distxy(const vec &e) const { float dx = e.x - x, dy = e.y - y; return sqrtf(dx*dx + dy*dy); }
-	float magnitudexy() const { return sqrtf(x*x + y*y); }
+	float distxy(const vec &e) const { float dx = e.x - x, dy = e.y - y; return sqrtf(dx*dx + dy * dy); }
+	float magnitudexy() const { return sqrtf(x*x + y * y); }
 
 	vec &cross(const vec &a, const vec &b) { x = a.y*b.z - a.z*b.y; y = a.z*b.x - a.x*b.z; z = a.x*b.y - a.y*b.x; return *this; }
-	float cxy(const vec &a) { return x*a.y - y*a.x; }
+	float cxy(const vec &a) { return x * a.y - y * a.x; }
 
 	//scale vec at a fixed point with equal dimension for screen drawing
 	vec scaleFixedPoint(float scale, vec fixedPoint)
@@ -107,8 +107,6 @@ struct glmatrixf
 		MULMAT(0, 8); MULMAT(1, 8); MULMAT(2, 8); MULMAT(3, 8);
 		MULMAT(0, 12); MULMAT(1, 12); MULMAT(2, 12); MULMAT(3, 12);
 	}
-
-	
 
 #undef MULMAT
 

@@ -16,5 +16,5 @@
 #include "menu.h"
 #include "esp.h"
 #include "aimbot.h"
-#include "openGLHacks.h" 
+#include "openGLHacks.h"
 #include "gltext.h"

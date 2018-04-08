@@ -51,7 +51,7 @@ public:
 	float body = buff + numFunctions * (textHeight + buff) + buff;
 	float footer = header;
 	float outlineWidth = 2;
-	
+
 	//new
 	void renderLine(std::string textString, float &xpos, float &ypos)
 	{

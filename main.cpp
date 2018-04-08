@@ -45,8 +45,6 @@ DWORD WINAPI Dragnipur(LPVOID param)
 	FreeConsole();
 	HookSwapBuffers();
 
-	
-
 	//hookdrawHud function
 	drawTheHUD = (gl_drawHUD)((DWORD)GetModuleHandleA("ac_client.exe") + 0xAAF0);
 	DetourTransactionBegin();

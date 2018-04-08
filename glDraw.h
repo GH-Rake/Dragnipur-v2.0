@@ -50,7 +50,6 @@ void renderText(std::string textString, float xpos, float ypos)
 	font.Print(xpos, ypos, rgb::red, "%s", textString.c_str());
 }
 
-
 void drawOutline(MyRect box)
 {
 	box.tl.x -= 1.0f;
