@@ -13,7 +13,7 @@ gl_drawHUD drawTheHUD;
 void hackMain(int w, int h, int curfps, int nquads, int curvert, bool underwater)
 {
 	aBot.readPlayerData();
-	aBot.ReadHotKeys();
+	ReadHotKeys(aBot);
 	drawTheHUD(w, h, curfps, nquads, curvert, underwater);
 }
 

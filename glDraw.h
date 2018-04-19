@@ -18,17 +18,6 @@ namespace rgb
 
 GL::Font font;
 
-/*
-//draw rectangle outline
-void drawRectangle(MyRect r, float lineWidth);
-
-void drawFilledRect(MyRect r);
-//NEW:
-void renderText(std::string textString, float xpos, float ypos);
-void drawOutline(MyRect box);
-void drawCrosshair();
-*/
-
 //draw rectangle outline
 void drawRectangle(MyRect r, float lineWidth)
 {
