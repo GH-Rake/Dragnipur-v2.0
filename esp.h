@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include "menu.h"
 int iESP = 0;
 bool bMapEntESP = false;
 enum espMode { OFF = 0, PLAYERSONLY, ALL };
@@ -7,7 +9,7 @@ void esp(PlayerClass p)
 {
 	vec vCenter = { p.ent->vHead.x, p.ent->vHead.y, p.ent->vHead.z - 4.50f + (float)(PLAYER_HEIGHT / 2) }; //4.5 = eyeheight
 
-	vec2 screenCoords = math2.W2S(glmvpmatrix, vCenter);
+	vec2 screenCoords = W2S(glmvpmatrix, vCenter);
 	p.dist = Get3dDistance(localPlayer->vLocation, p.ent->vLocation);
 
 	//Creates an ESP box from the center the of the player scaled to the model
@@ -103,7 +105,7 @@ void esp(mapEnt * e, std::string text)
 	newz = newz + currCube->floor + 0.5;
 
 	float dist = Get3dDistance(localPlayer->vLocation, vec(e->x, e->y, newz));
-	vec2 screenCoords = math2.W2S(glmvpmatrix, vec(e->x, e->y, newz));
+	vec2 screenCoords = W2S(glmvpmatrix, vec(e->x, e->y, newz));
 
 	//Creates an ESP box from the center the of the object scaled in modelspace
 	MyRect box;
@@ -144,7 +146,7 @@ void esp(vec e)
 	std::string text = "FLAG";
 	float dist = Get3dDistance(localPlayer->vLocation, e);
 
-	vec2 screenCoords = math2.W2S(glmvpmatrix, e);
+	vec2 screenCoords = W2S(glmvpmatrix, e);
 
 	//Creates an ESP box from the center the of the object scaled in modelspace
 	MyRect box;

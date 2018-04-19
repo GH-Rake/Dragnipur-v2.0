@@ -1,3 +1,5 @@
+#pragma comment(lib, "lib\\OpenGL32.Lib")
+
 extern glmatrixf * glmvpmatrix;
 extern void drawCrosshair();
 #pragma once

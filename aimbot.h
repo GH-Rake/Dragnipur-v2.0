@@ -1,4 +1,8 @@
 #pragma once
+#include <algorithm>
+#include "reversals.h"
+#include "esp.h"
+
 bool playerSorter(PlayerClass &lhs, PlayerClass &rhs);
 std::vector <PlayerClass> targets;
 PlayerClass target;

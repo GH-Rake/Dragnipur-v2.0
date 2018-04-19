@@ -1,7 +1,9 @@
-//GuidedHacking.com
-//Big Thanks to Spock & Solaire
-#include "internalIncludes.h"
 #include <Windows.h>
+#include <thread>
+#pragma comment(lib, "lib\\detours.lib")
+#include "include\detours.h"
+#include "aimbot.h"
+#include "openGLHacks.h"
 
 //drawHUD function to hook:
 typedef void(__cdecl *gl_drawHUD) (int w, int h, int curfps, int nquads, int curvert, bool underwater);

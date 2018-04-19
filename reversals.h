@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include "geom.h"
 
 int * gameMode = (int*)(0x50F49C);
 int * numOfPlayers = (int*)(0x50f500);

@@ -24,15 +24,17 @@
     <ClInclude Include="geom.h" />
     <ClInclude Include="glDraw.h" />
     <ClInclude Include="gltext.h" />
-    <ClInclude Include="internalIncludes.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="myRect.h" />
     <ClInclude Include="openGLHacks.h" />
     <ClInclude Include="reversals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="geom.cpp" />
+    <ClCompile Include="glDraw.cpp" />
     <ClCompile Include="gltext.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyRect.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F64CA93B-A89D-45D5-9DF9-FFFF18FBDF61}</ProjectGuid>

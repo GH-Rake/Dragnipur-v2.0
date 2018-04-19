@@ -1,11 +1,12 @@
 #pragma once
 #include "gltext.h"
+#include <string>
+#include "myRect.h"
 
 GLfloat viewport[4] = { 0 };
 GLfloat depthrange[2] = { 0 };
 #define WINDOWWIDTH viewport[2]
 #define WINDOWHEIGHT viewport[3]
-
 namespace rgb
 {
 	const GLubyte red[3] = { 255, 0, 0 };
@@ -16,6 +17,17 @@ namespace rgb
 }
 
 GL::Font font;
+
+/*
+//draw rectangle outline
+void drawRectangle(MyRect r, float lineWidth);
+
+void drawFilledRect(MyRect r);
+//NEW:
+void renderText(std::string textString, float xpos, float ypos);
+void drawOutline(MyRect box);
+void drawCrosshair();
+*/
 
 //draw rectangle outline
 void drawRectangle(MyRect r, float lineWidth)
@@ -33,7 +45,7 @@ void drawRectangle(MyRect r, float lineWidth)
 void drawFilledRect(MyRect r)
 {
 	vec2 vertices[6] = { r.tr, r.br, r.tl,   // First triangle
-						 r.tl, r.br, r.bl }; // Second triangle
+		r.tl, r.br, r.bl }; // Second triangle
 	initGLDraw();
 
 	glEnableClientState(GL_VERTEX_ARRAY);

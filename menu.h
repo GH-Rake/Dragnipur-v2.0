@@ -1,4 +1,5 @@
 #pragma once
+#include "glDraw.h"
 float fWindowScale;
 
 float centerTextX(MyRect box, std::string text)

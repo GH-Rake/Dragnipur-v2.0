@@ -1,6 +1,7 @@
 #pragma once
 #define PI ( 3.1415927f )
 #include <cmath>
+#include <gl\GL.h>
 
 struct vec
 {
@@ -151,40 +152,11 @@ struct glmatrixf
 			matrix->transformz(totransform)).div(matrix->transformw(totransform));
 	}
 
-	////multiply by model view projection matrix = clip coordinates then divide by w to get ndc
-
-	vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc)
-	{
-		//Matrix-Vector Product, multiplying world(eye) coordinates by projection matrix = clipCoords
-		vec4 clipCoords;
-		clipCoords.x = vPlayerLoc.x*mvpmatrix->v[0] + vPlayerLoc.y*mvpmatrix->v[4] + (vPlayerLoc.z)*mvpmatrix->v[8] + mvpmatrix->v[12];
-		clipCoords.y = vPlayerLoc.x*mvpmatrix->v[1] + vPlayerLoc.y*mvpmatrix->v[5] + (vPlayerLoc.z)*mvpmatrix->v[9] + mvpmatrix->v[13];
-		clipCoords.z = vPlayerLoc.x*mvpmatrix->v[2] + vPlayerLoc.y*mvpmatrix->v[6] + (vPlayerLoc.z)*mvpmatrix->v[10] + mvpmatrix->v[14];
-		clipCoords.w = vPlayerLoc.x*mvpmatrix->v[3] + vPlayerLoc.y*mvpmatrix->v[7] + (vPlayerLoc.z)*mvpmatrix->v[11] + mvpmatrix->v[15];
-
-		//perspective division, dividing by clip.W = NDC = Normalized Device Coordinates
-		vec ndc;
-		ndc.x = clipCoords.x / clipCoords.w;
-		ndc.y = clipCoords.y / clipCoords.w;
-		ndc.z = clipCoords.z / clipCoords.w;
-
-		//viewport tranform to screenCooords
-		GLfloat viewport[4] = { 0 };
-		GLfloat depthrange[2] = { 0 };
-		glGetFloatv(GL_VIEWPORT, viewport); // viewport = (0, 0, width, height)
-		glGetFloatv(GL_DEPTH_RANGE, depthrange); //depthrange = (0,1)
-
-		vec2 playerScreenCoords;
-		playerScreenCoords.x = (viewport[2] / 2 * ndc.x) + (ndc.x + viewport[2] / 2);
-		playerScreenCoords.y = -(viewport[3] / 2 * ndc.y) + (ndc.y + viewport[3] / 2);
-		return playerScreenCoords;
-	}
-
 	vec gettranslation() const
 	{
 		return vec(v[12], v[13], v[14]);
 	}
-}math2;
+};
 
 float Get3dDistance(vec to, vec from)
 {
@@ -201,7 +173,7 @@ vec CalcAngle(vec src, vec dst)
 	vec angles;
 
 	angles.x = (-(float)atan2(dst.x - src.x, dst.y - src.y)) / PI * 180.0f + 180.0f;
-	angles.y = (atan2(dst.z - src.z, Get3dDistance(src, dst))) * 180.0f / PI;//
+	angles.y = (atan2(dst.z - src.z, Get3dDistance(src, dst))) * 180.0f / PI;
 	angles.z = 0.0f;
 
 	return angles;
@@ -227,4 +199,31 @@ float DifferenceOfAngles(vec to, vec from)
 	//add them together and divide by 2, gives an average of the 2 angles
 	float fDifference = (vdifference.y + vdifference.x) / 2;
 	return fDifference;
+}
+
+vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc)
+{
+	//Matrix-Vector Product, multiplying world(eye) coordinates by projection matrix = clipCoords
+	vec4 clipCoords;
+	clipCoords.x = vPlayerLoc.x*mvpmatrix->v[0] + vPlayerLoc.y*mvpmatrix->v[4] + (vPlayerLoc.z)*mvpmatrix->v[8] + mvpmatrix->v[12];
+	clipCoords.y = vPlayerLoc.x*mvpmatrix->v[1] + vPlayerLoc.y*mvpmatrix->v[5] + (vPlayerLoc.z)*mvpmatrix->v[9] + mvpmatrix->v[13];
+	clipCoords.z = vPlayerLoc.x*mvpmatrix->v[2] + vPlayerLoc.y*mvpmatrix->v[6] + (vPlayerLoc.z)*mvpmatrix->v[10] + mvpmatrix->v[14];
+	clipCoords.w = vPlayerLoc.x*mvpmatrix->v[3] + vPlayerLoc.y*mvpmatrix->v[7] + (vPlayerLoc.z)*mvpmatrix->v[11] + mvpmatrix->v[15];
+
+	//perspective division, dividing by clip.W = NDC = Normalized Device Coordinates
+	vec ndc;
+	ndc.x = clipCoords.x / clipCoords.w;
+	ndc.y = clipCoords.y / clipCoords.w;
+	ndc.z = clipCoords.z / clipCoords.w;
+
+	//viewport tranform to screenCooords
+	GLfloat viewport[4] = { 0 };
+	GLfloat depthrange[2] = { 0 };
+	glGetFloatv(GL_VIEWPORT, viewport); // viewport = (0, 0, width, height)
+	glGetFloatv(GL_DEPTH_RANGE, depthrange); //depthrange = (0,1)
+
+	vec2 playerScreenCoords;
+	playerScreenCoords.x = (viewport[2] / 2 * ndc.x) + (ndc.x + viewport[2] / 2);
+	playerScreenCoords.y = -(viewport[3] / 2 * ndc.y) + (ndc.y + viewport[3] / 2);
+	return playerScreenCoords;
 }
