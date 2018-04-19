@@ -1,4 +1,3 @@
-/*
 #include "gltext.h"
 
 void GL::Font::Build(int height)
@@ -54,4 +53,3 @@ float GL::Font::centerText(float x, float width, float textWidth)
 		return (x - (difference / 2));
 	}
 }
-*/

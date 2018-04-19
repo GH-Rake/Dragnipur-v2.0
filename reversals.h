@@ -2,10 +2,11 @@
 #include <vector>
 #include "geom.h"
 
-int * gameMode = (int*)(0x50F49C);
-int * numOfPlayers = (int*)(0x50f500);
 #define PLAYER_HEIGHT 5.25
 #define HALF_PLAYER_WIDTH 1
+
+int * gameMode = (int*)(0x50F49C);
+int * numOfPlayers = (int*)(0x50f500);
 glmatrixf * glmvpmatrix = (glmatrixf*)(0x501AE8);
 
 enum gameModes

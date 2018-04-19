@@ -30,11 +30,13 @@
     <ClInclude Include="reversals.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="esp.cpp" />
     <ClCompile Include="geom.cpp" />
     <ClCompile Include="glDraw.cpp" />
     <ClCompile Include="gltext.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyRect.cpp" />
+    <ClCompile Include="openGLHacks.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F64CA93B-A89D-45D5-9DF9-FFFF18FBDF61}</ProjectGuid>

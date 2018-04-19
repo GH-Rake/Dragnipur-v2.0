@@ -2,28 +2,9 @@
 #include "glDraw.h"
 float fWindowScale;
 
-float centerTextX(MyRect box, std::string text)
-{
-	float boxWidth = box.tr.x - box.tl.x;
-	float textWidth = text.length() * 9;
-	float difference = boxWidth - textWidth;
-	return (box.tl.x + (difference / 2));
-}
+float centerTextX(MyRect box, std::string text);
 
-vec2 centerTextXY(MyRect box, std::string text)
-{
-	vec2 textPOS;
-	float boxWidth = box.tr.x - box.tl.x;
-	float textWidth = text.length() * 9;
-	float differenceX = boxWidth - textWidth;
-	textPOS.x = box.tl.x + (differenceX / 2);
-
-	float boxHeight = box.bl.y - box.tl.y;
-	float textHeight = 15;
-	float differenceY = boxHeight - textHeight;
-	textPOS.y = box.tl.y + textHeight - (differenceY / 4);//why??
-	return textPOS;
-}
+vec2 centerTextXY(MyRect box, std::string text);
 
 class Menu
 {
@@ -227,7 +208,7 @@ public:
 		glColor3ub(0, 0, 0); //black
 		drawOutline(footer1);
 
-		//draw text // could make these all in one after boxes are drawn
+		//draw text
 		pos = centerTextXY(footer1, sFooter); //using old rasterpos
 		glColor3ub(255, 0, 0);
 		glRasterPos2f(pos.x, pos.y);
@@ -238,3 +219,27 @@ public:
 		glPopMatrix();
 	}
 }menu;
+
+//defs
+float centerTextX(MyRect box, std::string text)
+{
+	float boxWidth = box.tr.x - box.tl.x;
+	float textWidth = text.length() * 9;
+	float difference = boxWidth - textWidth;
+	return (box.tl.x + (difference / 2));
+}
+
+vec2 centerTextXY(MyRect box, std::string text)
+{
+	vec2 textPOS;
+	float boxWidth = box.tr.x - box.tl.x;
+	float textWidth = text.length() * 9;
+	float differenceX = boxWidth - textWidth;
+	textPOS.x = box.tl.x + (differenceX / 2);
+
+	float boxHeight = box.bl.y - box.tl.y;
+	float textHeight = 15;
+	float differenceY = boxHeight - textHeight;
+	textPOS.y = box.tl.y + textHeight - (differenceY / 4);//why??
+	return textPOS;
+}

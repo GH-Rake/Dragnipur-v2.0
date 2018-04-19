@@ -7,6 +7,7 @@ GLfloat viewport[4] = { 0 };
 GLfloat depthrange[2] = { 0 };
 #define WINDOWWIDTH viewport[2]
 #define WINDOWHEIGHT viewport[3]
+
 namespace rgb
 {
 	const GLubyte red[3] = { 255, 0, 0 };
