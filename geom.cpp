@@ -51,40 +51,32 @@ const float glmatrixf::transformw(const vec &p)
 
 float Get3dDistance(vec to, vec from)
 {
-	return (float)
-		(sqrt(
+	return
+		(sqrtf(
 		((to.x - from.x) * (to.x - from.x)) +
 			((to.y - from.y) * (to.y - from.y)) +
 			((to.z - from.z) * (to.z - from.z))
 		));
 }
 
+/*
 vec CalcAngle(vec src, vec dst)
 {
-	vec angles;
-	angles.x = (-(float)atan2(dst.x - src.x, dst.y - src.y)) / PI * 180.0f + 180.0f;
-	angles.y = (atan2(dst.z - src.z, Get3dDistance(src, dst))) * 180.0f / PI;
-	angles.z = 0.0f;
-	return angles;
+	vec angle;
+	angle.x = -atan2f(dst.x - src.x, dst.y - src.y) / 180.0f * PI + 180.0f;
+	angle.y = atan2f(dst.z - src.z, Get3dDistance(src, dst)) * 180.0f / PI ;
+	angle.z = 0.0f;
+
+	return angle;
 }
+*/
 
-float DifferenceOfAngles(vec to, vec from)
+vec CalcAngle(vec src, vec dst)
 {
-	vec vdifference;
-	vdifference.y = from.y - to.y;
-	vdifference.x = from.x - to.x;
+	vec angle;
+	angle.x = -atan2f(dst.x - src.x, dst.y - src.y) / PI * 180.0f + 180.0f;
+	angle.y = asinf((dst.z - src.z) / Get3dDistance(src, dst)) * 180.0f / PI;
+	angle.z = 0.0f;
 
-	//normalize by making them positive values if they are negative
-	if (vdifference.y < 0)
-	{
-		vdifference.y *= -1;
-	}
-	if (vdifference.x < 0)
-	{
-		vdifference.x *= -1;
-	}
-
-	//add them together and divide by 2, gives an average of the 2 angles
-	float fDifference = (vdifference.y + vdifference.x) / 2;
-	return fDifference;
+	return angle;
 }

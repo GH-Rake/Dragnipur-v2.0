@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "reversals.h"
 #include "esp.h"
+#include "geom.h"
 
 bool playerSorter(PlayerClass &lhs, PlayerClass &rhs);
 std::vector <PlayerClass> targets;
@@ -41,7 +42,7 @@ public:
 		for (PlayerClass &p : targets)
 		{
 			p.vAimbotAngles = CalcAngle(localPlayer->vHead, p.ent->vHead);
-			p.fAngleFromCross = DifferenceOfAngles(p.vAimbotAngles, localPlayer->vViewAngle);
+			p.fAngleFromCross = Get3dDistance(p.vAimbotAngles, localPlayer->vViewAngle);
 		}
 
 		sort(targets.begin(), targets.end(), playerSorter);

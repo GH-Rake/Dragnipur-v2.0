@@ -1,5 +1,5 @@
 #pragma once
-#define PI ( 3.1415927f )
+#define PI 3.14159265358979323846
 #include <cmath>
 
 struct vec
@@ -42,7 +42,5 @@ struct glmatrixf
 float Get3dDistance(vec to, vec from);
 
 vec CalcAngle(vec src, vec dst);
-
-float DifferenceOfAngles(vec to, vec from);
 
 vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc);

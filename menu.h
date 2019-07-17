@@ -66,7 +66,6 @@ public:
 			functions.push_back("[F7]  Fly Hack : " + sFlyHackStatus);
 			functions.push_back("[F8]  SetTeleporter");
 			functions.push_back("[F9]  Teleport");
-			//functions.push_back("[F10] TeleBot"); Removed 'cuz bugged
 			functions.push_back("[F11] TeleFlag");
 			functions.push_back(" ");//spacing
 			functions.push_back("[HOME] Change Tab");
@@ -220,7 +219,6 @@ public:
 	}
 }menu;
 
-//defs
 float centerTextX(MyRect box, std::string text)
 {
 	float boxWidth = box.tr.x - box.tl.x;

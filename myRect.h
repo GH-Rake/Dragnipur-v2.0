@@ -10,4 +10,3 @@ public:
 	//equal dimension scaling
 	void scale(float scale);
 };
-

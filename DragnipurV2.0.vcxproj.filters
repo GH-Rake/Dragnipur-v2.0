@@ -13,14 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="gltest">
-      <UniqueIdentifier>{2994aa60-0a37-4a44-9148-9f32db2fa383}</UniqueIdentifier>
-    </Filter>
     <Filter Include="glDraw">
       <UniqueIdentifier>{919802d8-0c4c-4dec-b13c-7d64814e4975}</UniqueIdentifier>
     </Filter>
     <Filter Include="geom">
       <UniqueIdentifier>{53e22e0b-e2d0-4740-9d79-29ed2bc537e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gltext">
+      <UniqueIdentifier>{2994aa60-0a37-4a44-9148-9f32db2fa383}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +40,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gltext.h">
-      <Filter>gltest</Filter>
+      <Filter>gltext</Filter>
     </ClInclude>
     <ClInclude Include="glDraw.h">
       <Filter>glDraw</Filter>
@@ -60,7 +60,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gltext.cpp">
-      <Filter>gltest</Filter>
+      <Filter>gltext</Filter>
     </ClCompile>
     <ClCompile Include="geom.cpp">
       <Filter>geom</Filter>

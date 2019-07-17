@@ -112,7 +112,7 @@ public:
 	float dist;
 	float fAngleFromCross;
 
-	PlayerClass() {	}
+	PlayerClass() {}
 
 	//playerVector constructor
 	PlayerClass(DWORD * player)
@@ -125,7 +125,7 @@ public:
 	bool IsVisible();
 };
 
-playerent * localPlayer = (playerent*)*(DWORD*)(0x509B74);
+playerent * localPlayer = *(playerent**)0x50F4F4;
 std::vector <PlayerClass> playerVector;
 
 struct traceresult_s
