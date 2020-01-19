@@ -1,10 +1,10 @@
 #pragma once
 #pragma comment(lib, "lib\\OpenGL32.Lib")
 
-extern glmatrixf * glmvpmatrix;
+extern glmatrixf* glmvpmatrix;
 extern void drawCrosshair();
 
-typedef BOOL(WINAPI * _wglSwapBuffers) (_In_ HDC hDc);
+typedef BOOL(WINAPI* _wglSwapBuffers) (_In_ HDC hDc);
 _wglSwapBuffers owglSwapBuffers;
 
 //wglSwapBuffers Hook
@@ -58,10 +58,10 @@ void HookSwapBuffers()
 
 	if (hMod)
 	{
-		owglSwapBuffers = (_wglSwapBuffers)(DWORD)GetProcAddress(hMod, "wglSwapBuffers");
+		owglSwapBuffers = (_wglSwapBuffers)GetProcAddress(hMod, "wglSwapBuffers");
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourAttach(&(PVOID &)owglSwapBuffers, hwglSwapBuffers);
+		DetourAttach(&(PVOID&)owglSwapBuffers, hwglSwapBuffers);
 		DetourTransactionCommit();
 	}
 }
@@ -80,14 +80,14 @@ inline void initGLDraw()
 	glLoadIdentity();
 }
 
-vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc)
+vec2 W2S(glmatrixf* mvpmatrix, vec vPlayerLoc)
 {
 	//Matrix-Vector Product, multiplying world(eye) coordinates by projection matrix = clipCoords
 	vec4 clipCoords;
-	clipCoords.x = vPlayerLoc.x*mvpmatrix->v[0] + vPlayerLoc.y*mvpmatrix->v[4] + (vPlayerLoc.z)*mvpmatrix->v[8] + mvpmatrix->v[12];
-	clipCoords.y = vPlayerLoc.x*mvpmatrix->v[1] + vPlayerLoc.y*mvpmatrix->v[5] + (vPlayerLoc.z)*mvpmatrix->v[9] + mvpmatrix->v[13];
-	clipCoords.z = vPlayerLoc.x*mvpmatrix->v[2] + vPlayerLoc.y*mvpmatrix->v[6] + (vPlayerLoc.z)*mvpmatrix->v[10] + mvpmatrix->v[14];
-	clipCoords.w = vPlayerLoc.x*mvpmatrix->v[3] + vPlayerLoc.y*mvpmatrix->v[7] + (vPlayerLoc.z)*mvpmatrix->v[11] + mvpmatrix->v[15];
+	clipCoords.x = vPlayerLoc.x * mvpmatrix->v[0] + vPlayerLoc.y * mvpmatrix->v[4] + (vPlayerLoc.z) * mvpmatrix->v[8] + mvpmatrix->v[12];
+	clipCoords.y = vPlayerLoc.x * mvpmatrix->v[1] + vPlayerLoc.y * mvpmatrix->v[5] + (vPlayerLoc.z) * mvpmatrix->v[9] + mvpmatrix->v[13];
+	clipCoords.z = vPlayerLoc.x * mvpmatrix->v[2] + vPlayerLoc.y * mvpmatrix->v[6] + (vPlayerLoc.z) * mvpmatrix->v[10] + mvpmatrix->v[14];
+	clipCoords.w = vPlayerLoc.x * mvpmatrix->v[3] + vPlayerLoc.y * mvpmatrix->v[7] + (vPlayerLoc.z) * mvpmatrix->v[11] + mvpmatrix->v[15];
 
 	//perspective division, dividing by clip.W = NDC = Normalized Device Coordinates
 	vec ndc;

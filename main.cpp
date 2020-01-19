@@ -6,7 +6,7 @@
 #include "openGLHacks.h"
 
 //drawHUD function to hook:
-typedef void(__cdecl *gl_drawHUD) (int w, int h, int curfps, int nquads, int curvert, bool underwater);
+typedef void(__cdecl* gl_drawHUD) (int w, int h, int curfps, int nquads, int curvert, bool underwater);
 gl_drawHUD drawTheHUD;
 
 //my drawHUD hooked function
@@ -79,7 +79,7 @@ BOOL __stdcall DllMain(HINSTANCE hModule, DWORD dwReason, LPVOID lpReserved)
 
 		DetourTransactionBegin();
 		DetourUpdateThread(GetCurrentThread());
-		DetourDetach(&(PVOID &)owglSwapBuffers, hwglSwapBuffers);
+		DetourDetach(&(PVOID&)owglSwapBuffers, hwglSwapBuffers);
 		DetourDetach(&(PVOID&)drawTheHUD, hackMain);
 		DetourTransactionCommit();
 

@@ -9,10 +9,10 @@ struct vec
 	vec() { x = y = z = 0; }
 	vec(float a, float b, float c) : x(a), y(b), z(c) {}
 
-	vec &sub(const vec &o);
+	vec& sub(const vec& o);
 	const float squaredlen();
 	const float magnitude();
-	const float dist(const vec &e, vec &t);
+	const float dist(const vec& e, vec& t);
 
 	//scale vec at a fixed point with equal dimension for screen drawing
 	vec scaleFixedPoint(float scale, vec fixedPoint);
@@ -36,11 +36,11 @@ struct vec4
 struct glmatrixf
 {
 	float v[16];
-	const float transformw(const vec &p);
+	const float transformw(const vec& p);
 };
 
 float Get3dDistance(vec to, vec from);
 
 vec CalcAngle(vec src, vec dst);
 
-vec2 W2S(glmatrixf *mvpmatrix, vec vPlayerLoc);
+vec2 W2S(glmatrixf* mvpmatrix, vec vPlayerLoc);

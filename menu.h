@@ -1,10 +1,13 @@
 #pragma once
 #include "glDraw.h"
+
 float fWindowScale;
 
 float centerTextX(MyRect box, std::string text);
 
 vec2 centerTextXY(MyRect box, std::string text);
+
+extern GL::Font font;
 
 class Menu
 {
@@ -35,7 +38,7 @@ public:
 	float outlineWidth = 2;
 
 	//new
-	void renderLine(std::string textString, float &xpos, float &ypos)
+	void renderLine(std::string textString, float& xpos, float& ypos)
 	{
 		//font size?
 		font.Print(xpos, ypos, rgb::red, "%s", textString.c_str());

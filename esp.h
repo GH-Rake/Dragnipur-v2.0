@@ -95,13 +95,13 @@ void esp(PlayerClass p)
 	drawFilledRect(healthBarRed);
 }
 
-void esp(mapEnt * e, std::string text)
+void esp(mapEnt* e, std::string text)
 {
 	float newz = (float)(1 + sinf(*lastmillis / 100.0f + e->x + e->y) / 20);
 	newz = newz + e->attr1;
 	int bullshit = (e->x + (e->y << *sfactor)) << 4;
-	DWORD cubeAddress = bullshit + *(DWORD*)world;
-	sqr * currCube = (sqr*)cubeAddress;
+	intptr_t cubeAddress = bullshit + *(intptr_t*)world;
+	sqr* currCube = (sqr*)cubeAddress;
 	newz = newz + currCube->floor + 0.5;
 
 	float dist = Get3dDistance(localPlayer->vLocation, vec(e->x, e->y, newz));
@@ -199,8 +199,8 @@ void espMapEnts()
 	int numOfEnts = *(int*)0x510120;
 	for (int i = 0; i < numOfEnts; i++)
 	{
-		DWORD temp = *(DWORD*)(0x510118); //mapent list ptr?
-		mapEnt * e = (mapEnt*)(temp + i * 0x14);
+		intptr_t temp = *(intptr_t*)(0x510118); //mapent list ptr?
+		mapEnt* e = (mapEnt*)(temp + i * 0x14);
 
 		if (e->bSpawned == 1)
 		{
@@ -240,9 +240,9 @@ void espMapEnts()
 void espFlags()
 {
 	enum { INBASE = 0, STOLEN = 1, DROPPED = 2, IDLE = 3 };
-	flagEnt * flags[2] = { (flagEnt*)0x50F4A8, (flagEnt*)0x50F4CC };
+	flagEnt* flags[2] = { (flagEnt*)0x50F4A8, (flagEnt*)0x50F4CC };
 
-	for each (flagEnt* flag in flags)
+	for each (flagEnt * flag in flags)
 	{
 		if (flag->team == localPlayer->team)
 		{

@@ -4,7 +4,7 @@
 #include "esp.h"
 #include "geom.h"
 
-bool playerSorter(PlayerClass &lhs, PlayerClass &rhs);
+bool playerSorter(PlayerClass& lhs, PlayerClass& rhs);
 std::vector <PlayerClass> targets;
 PlayerClass target;
 bool bShooting = false;
@@ -24,7 +24,7 @@ public:
 	void sortAimShoot()
 	{
 		targets.clear();
-		for each(PlayerClass p in playerVector)
+		for each (PlayerClass p in playerVector)
 		{
 			if (p.ent == nullptr || p.ent->state != 0 || m_teammode && p.ent->team == localPlayer->team)
 			{
@@ -39,7 +39,7 @@ public:
 		}
 
 		//sort targets Vector
-		for (PlayerClass &p : targets)
+		for (PlayerClass& p : targets)
 		{
 			p.vAimbotAngles = CalcAngle(localPlayer->vHead, p.ent->vHead);
 			p.fAngleFromCross = Get3dDistance(p.vAimbotAngles, localPlayer->vViewAngle);
@@ -58,14 +58,14 @@ public:
 	{
 		playerVector.clear();
 		int numOfOtherPlayers = *numOfPlayers - 1;
-		DWORD * playerArrayAddress = (DWORD*)0x50F4F8;
+		intptr_t* playerArrayAddress = (intptr_t*)0x50F4F8;
 
 		for (int x = 0; x <= numOfOtherPlayers; x++)
 		{
-			DWORD * tempPlayerAddress = (DWORD*)(*playerArrayAddress + x * 0x4);
+			intptr_t* tempPlayerAddress = (intptr_t*)(*playerArrayAddress + x * 0x4);
 			if (*tempPlayerAddress != 0)
 			{
-				if (*(DWORD*)*tempPlayerAddress == 0x4E4A98 || *(DWORD*)*tempPlayerAddress == 0x4E4AC0)
+				if (*(intptr_t*)*tempPlayerAddress == 0x4E4A98 || *(intptr_t*)*tempPlayerAddress == 0x4E4AC0)
 				{
 					playerVector.push_back(PlayerClass(tempPlayerAddress));
 				}
@@ -74,7 +74,7 @@ public:
 	}
 }aBot;
 
-bool playerSorter(PlayerClass &lhs, PlayerClass &rhs)
+bool playerSorter(PlayerClass& lhs, PlayerClass& rhs)
 {
 	return lhs.fAngleFromCross < rhs.fAngleFromCross;
 }
@@ -222,7 +222,7 @@ void ReadHotKeys(Aimbot& aBot)
 			{
 				menu.sFullbright = "ON";
 
-				DWORD fullbright = 0x00454EF0;
+				intptr_t fullbright = 0x00454EF0;
 				__asm
 				{
 					call fullbright;
@@ -232,7 +232,7 @@ void ReadHotKeys(Aimbot& aBot)
 			{
 				menu.sFullbright = "OFF";
 
-				DWORD calclight = 0x0044F040;
+				intptr_t calclight = 0x0044F040;
 				__asm
 				{
 					call calclight;
@@ -248,7 +248,7 @@ void ReadHotKeys(Aimbot& aBot)
 			if (aBot.bFlyHackStatus)
 			{
 				VirtualProtect((void*)0x45ADD8, 1, PAGE_EXECUTE_READWRITE, &old_protect);
-				*(BYTE *)0x45ADD8 = 1;
+				*(BYTE*)0x45ADD8 = 1;
 				VirtualProtect((void*)0x45ADD8, 1, old_protect, &old_protect);
 				menu.sFlyHackStatus = "ON";
 			}
@@ -257,7 +257,7 @@ void ReadHotKeys(Aimbot& aBot)
 			{
 				//restore
 				VirtualProtect((void*)0x45ADD8, 1, PAGE_EXECUTE_READWRITE, &old_protect);
-				*(BYTE *)0x45ADD8 = 0;
+				*(BYTE*)0x45ADD8 = 0;
 				VirtualProtect((void*)0x45ADD8, 1, old_protect, &old_protect);
 				menu.sFlyHackStatus = "OFF";
 			}
@@ -278,9 +278,9 @@ void ReadHotKeys(Aimbot& aBot)
 		{
 			enum flagStatus { INBASE = 0, STOLEN = 1, DROPPED = 2, IDLE = 3 };
 
-			flagEnt * flags[2] = { (flagEnt*)0x50F4A8, (flagEnt*)0x50F4CC };
-			flagEnt * myFlag = 0;
-			flagEnt * enemyFlag = 0;
+			flagEnt* flags[2] = { (flagEnt*)0x50F4A8, (flagEnt*)0x50F4CC };
+			flagEnt* myFlag = 0;
+			flagEnt* enemyFlag = 0;
 
 			if (flags[0]->team == localPlayer->team)
 			{

@@ -2,12 +2,12 @@
 #include <vector>
 #include "geom.h"
 
-#define PLAYER_HEIGHT 5.25
-#define HALF_PLAYER_WIDTH 1
+const int PLAYER_HEIGHT = 5.25;
+const int HALF_PLAYER_WIDTH = 1;
 
-int * gameMode = (int*)(0x50F49C);
-int * numOfPlayers = (int*)(0x50f500);
-glmatrixf * glmvpmatrix = (glmatrixf*)(0x501AE8);
+int* gameMode = (int*)(0x50F49C);
+int* numOfPlayers = (int*)(0x50f500);
+glmatrixf* glmvpmatrix = (glmatrixf*)(0x501AE8);
 
 enum gameModes
 {
@@ -70,11 +70,11 @@ class weapon
 public:
 	char pad_0x0000[0x4]; //0x0000
 	__int32 ID; //0x0004
-	playerent * owner; //0x0008
-	DWORD * guninfo; //0x000C
-	int * ammo2; //0x0010
-	int * ammo; //0x0014
-	int * gunWait;
+	playerent* owner; //0x0008
+	intptr_t* guninfo; //0x000C
+	int* ammo2; //0x0010
+	int* ammo; //0x0014
+	int* gunWait;
 	int shots;
 	int breload;
 };
@@ -107,7 +107,7 @@ public:
 class PlayerClass
 {
 public:
-	playerent * ent;
+	playerent* ent;
 	vec vAimbotAngles;
 	float dist;
 	float fAngleFromCross;
@@ -115,9 +115,9 @@ public:
 	PlayerClass() {}
 
 	//playerVector constructor
-	PlayerClass(DWORD * player)
+	PlayerClass(intptr_t* player)
 	{
-		ent = (playerent*)*(DWORD*)player;
+		ent = (playerent*)*(intptr_t*)player;
 		dist = 0;
 		fAngleFromCross = 0;
 		vAimbotAngles = {};
@@ -125,7 +125,7 @@ public:
 	bool IsVisible();
 };
 
-playerent * localPlayer = *(playerent**)0x50F4F4;
+playerent* localPlayer = *(playerent**)0x50F4F4;
 std::vector <PlayerClass> playerVector;
 
 struct traceresult_s
@@ -136,7 +136,7 @@ struct traceresult_s
 
 bool PlayerClass::IsVisible()
 {
-	DWORD traceLine = 0x048a310;
+	intptr_t traceLine = 0x048a310;
 	traceresult_s traceresult;
 	traceresult.collided = false;
 	vec from = localPlayer->vHead;
@@ -208,6 +208,6 @@ struct sqr
 	unsigned char reserved[2];
 };
 
-sqr * world = (sqr*)0x50A1F8;
-int * sfactor = (int*)0x505BB4;
-int * lastmillis = (int*)0x509EAC;
+sqr* world = (sqr*)0x50A1F8;
+int* sfactor = (int*)0x505BB4;
+int* lastmillis = (int*)0x509EAC;
