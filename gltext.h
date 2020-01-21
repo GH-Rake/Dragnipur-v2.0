@@ -10,10 +10,10 @@ namespace GL
 	{
 	public:
 		bool bBuilt = false;
-		unsigned int base;
+		unsigned int base{ 0 };
 		HDC hdc = nullptr;
-		int height;
-		int width;
+		int height{ 0 };
+		int width{ 0 };
 
 		void Build(int height);
 		void Print(float x, float y, const unsigned char color[3], const char* format, ...);

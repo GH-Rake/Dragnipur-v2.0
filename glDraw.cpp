@@ -53,10 +53,13 @@ void drawCrosshair()
 	glColor3ub(240, 240, 240);//white
 	glLineWidth(2.0);
 
-	int crossHair[8] = { WINDOWWIDTH / 2 - 7, WINDOWHEIGHT / 2,// horizontal line
-		WINDOWWIDTH / 2 + 7, WINDOWHEIGHT / 2,
-		WINDOWWIDTH / 2, WINDOWHEIGHT / 2 + 7, //vertical line
-		WINDOWWIDTH / 2, WINDOWHEIGHT / 2 - 7 };
+	GLfloat tmp_viewport[4];
+	glGetFloatv(GL_VIEWPORT, tmp_viewport);
+
+	int crossHair[8] = { tmp_viewport[2] / 2 - 7, tmp_viewport[3] / 2,// horizontal line
+		tmp_viewport[2] / 2 + 7, tmp_viewport[3] / 2,
+		tmp_viewport[2] / 2, tmp_viewport[3] / 2 + 7, //vertical line
+		tmp_viewport[2] / 2, tmp_viewport[3] / 2 - 7 };
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(2, GL_INT, 0, crossHair);

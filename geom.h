@@ -23,7 +23,8 @@ struct vec
 
 struct vec2
 {
-	float x, y;
+	float x{ 0 };
+	float y{ 0 };
 	//scale vec at a fixed point with equal dimension for screen drawing
 	void scaleFixedPoint(float scale, vec2 fixedPoint);
 };

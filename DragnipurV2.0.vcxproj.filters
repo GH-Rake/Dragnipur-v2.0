@@ -13,66 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="glDraw">
-      <UniqueIdentifier>{919802d8-0c4c-4dec-b13c-7d64814e4975}</UniqueIdentifier>
+    <Filter Include="aimbot">
+      <UniqueIdentifier>{8e22386a-b129-447f-a5a4-bd4bad75055e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="geom">
+    <Filter Include="Header Files\geom">
       <UniqueIdentifier>{53e22e0b-e2d0-4740-9d79-29ed2bc537e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="gltext">
+    <Filter Include="Header Files\glDraw">
+      <UniqueIdentifier>{919802d8-0c4c-4dec-b13c-7d64814e4975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gltext">
       <UniqueIdentifier>{2994aa60-0a37-4a44-9148-9f32db2fa383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\menu">
+      <UniqueIdentifier>{7a5ed1ec-1ff4-4da6-aa36-3e12621051a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\esp">
+      <UniqueIdentifier>{8d95f09e-05bf-4e68-a057-d00d3e0477ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mem">
+      <UniqueIdentifier>{c687dcd5-11e2-4f3f-b2ef-1a7767b296ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\reversals">
+      <UniqueIdentifier>{1b631864-35db-4842-881e-9eba6e7ef7cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\openGLHacks">
+      <UniqueIdentifier>{cd8c946b-8e05-4008-b9ef-267c44d6c4a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="openGLHacks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reversals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aimbot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="esp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gltext.h">
-      <Filter>gltext</Filter>
+      <Filter>Header Files\gltext</Filter>
     </ClInclude>
     <ClInclude Include="glDraw.h">
-      <Filter>glDraw</Filter>
+      <Filter>Header Files\glDraw</Filter>
     </ClInclude>
     <ClInclude Include="geom.h">
-      <Filter>geom</Filter>
+      <Filter>Header Files\geom</Filter>
     </ClInclude>
     <ClInclude Include="myRect.h">
-      <Filter>geom</Filter>
+      <Filter>Header Files\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="esp.h">
+      <Filter>Header Files\esp</Filter>
+    </ClInclude>
+    <ClInclude Include="openGLHacks.h">
+      <Filter>Header Files\openGLHacks</Filter>
+    </ClInclude>
+    <ClInclude Include="reversals.h">
+      <Filter>Header Files\reversals</Filter>
+    </ClInclude>
+    <ClInclude Include="aimbot.h">
+      <Filter>aimbot</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Header Files\mem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="esp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gltext.cpp">
-      <Filter>gltext</Filter>
+      <Filter>Header Files\gltext</Filter>
     </ClCompile>
     <ClCompile Include="geom.cpp">
-      <Filter>geom</Filter>
+      <Filter>Header Files\geom</Filter>
     </ClCompile>
     <ClCompile Include="MyRect.cpp">
-      <Filter>geom</Filter>
+      <Filter>Header Files\geom</Filter>
     </ClCompile>
     <ClCompile Include="glDraw.cpp">
-      <Filter>glDraw</Filter>
+      <Filter>Header Files\glDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Header Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="esp.cpp">
+      <Filter>Header Files\esp</Filter>
     </ClCompile>
     <ClCompile Include="openGLHacks.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\openGLHacks</Filter>
+    </ClCompile>
+    <ClCompile Include="reversals.cpp">
+      <Filter>Header Files\reversals</Filter>
+    </ClCompile>
+    <ClCompile Include="aimbot.cpp">
+      <Filter>aimbot</Filter>
+    </ClCompile>
+    <ClCompile Include="mem.cpp">
+      <Filter>Header Files\mem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

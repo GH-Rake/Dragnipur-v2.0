@@ -1,13 +1,20 @@
 #pragma once
+#include <Windows.h>
 #include <vector>
 #include "geom.h"
 
-const int PLAYER_HEIGHT = 5.25;
-const int HALF_PLAYER_WIDTH = 1;
+const int PLAYER_HEIGHT = 5.25f;
+const int HALF_PLAYER_WIDTH = 1.0f;
 
-int* gameMode = (int*)(0x50F49C);
-int* numOfPlayers = (int*)(0x50f500);
-glmatrixf* glmvpmatrix = (glmatrixf*)(0x501AE8);
+static int* gameMode = (int*)(0x50F49C);
+static int* numOfPlayers = (int*)(0x50f500);
+static glmatrixf* glmvpmatrix = (glmatrixf*)(0x501AE8);
+
+struct sqr;
+
+static sqr* world = (sqr*)0x50A1F8;
+static int* sfactor = (int*)0x505BB4;
+static int* lastmillis = (int*)0x509EAC;
 
 enum gameModes
 {
@@ -107,58 +114,27 @@ public:
 class PlayerClass
 {
 public:
-	playerent* ent;
-	vec vAimbotAngles;
-	float dist;
-	float fAngleFromCross;
+	playerent* ent{ nullptr };
+	vec vAimbotAngles{ 0,0,0 };
+	float dist{ 0 };
+	float fAngleFromCross{ 0 };
 
-	PlayerClass() {}
+	PlayerClass::PlayerClass();
 
 	//playerVector constructor
-	PlayerClass(intptr_t* player)
-	{
-		ent = (playerent*)*(intptr_t*)player;
-		dist = 0;
-		fAngleFromCross = 0;
-		vAimbotAngles = {};
-	}
-	bool IsVisible();
+	PlayerClass::PlayerClass(intptr_t* player);
+
+	bool PlayerClass::IsVisible();
 };
 
-playerent* localPlayer = *(playerent**)0x50F4F4;
-std::vector <PlayerClass> playerVector;
+static playerent* localPlayer = *(playerent**)0x50F4F4;
+static std::vector <PlayerClass> playerVector;
 
 struct traceresult_s
 {
-	vec end;
-	bool collided;
+	vec end{ 0,0,0 };
+	bool collided{ false };
 };
-
-bool PlayerClass::IsVisible()
-{
-	intptr_t traceLine = 0x048a310;
-	traceresult_s traceresult;
-	traceresult.collided = false;
-	vec from = localPlayer->vHead;
-	vec to = ent->vHead;
-
-	__asm
-	{
-		push 0; bSkipTags
-		push 0; bCheckPlayers
-		push localPlayer
-		push to.z
-		push to.y
-		push to.x
-		push from.z
-		push from.y
-		push from.x
-		lea eax, [traceresult]
-		call traceLine;
-		add esp, 36
-	}
-	return !traceresult.collided;
-}
 
 class mapEnt
 {
@@ -207,7 +183,3 @@ struct sqr
 	unsigned char tag;
 	unsigned char reserved[2];
 };
-
-sqr* world = (sqr*)0x50A1F8;
-int* sfactor = (int*)0x505BB4;
-int* lastmillis = (int*)0x509EAC;
