@@ -5,7 +5,7 @@
 
 enum espMode { OFF = 0, PLAYERSONLY, ALL };
 
-static int iESP = 0;
+extern int iESP;
 
 void espEnt(PlayerClass p);
 

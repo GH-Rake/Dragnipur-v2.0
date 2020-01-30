@@ -1,5 +1,7 @@
 #include "menu.h"
 
+float fWindowScale;
+
 void Menu::renderLine(std::string textString, float& xpos, float& ypos)
 {
 	//font size?

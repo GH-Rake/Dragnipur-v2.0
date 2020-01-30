@@ -1,6 +1,7 @@
 #include "esp.h"
 
 bool bMapEntESP = false;
+int iESP = 0;
 
 void espEnt(PlayerClass p)
 {

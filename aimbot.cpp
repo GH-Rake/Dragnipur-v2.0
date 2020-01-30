@@ -1,9 +1,10 @@
 #include "aimbot.h"
 
 Menu menu;
-
+Aimbot aBot;
 bool bFullbright = false;
 PlayerClass target;
+std::vector <PlayerClass> playerVector;
 std::vector <PlayerClass> targets;
 
 void Aimbot::sortAimShoot()

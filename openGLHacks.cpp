@@ -3,6 +3,7 @@
 #include "aimbot.h"
 
 extern Menu menu;
+twglSwapBuffers owglSwapBuffers;
 
 BOOL __stdcall hkwglSwapBuffers(HDC hDc)
 {

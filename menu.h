@@ -2,7 +2,7 @@
 #include "glDraw.h"
 #include <vector>
 
-static float fWindowScale;
+extern float fWindowScale;
 
 float centerTextX(MyRect box, std::string text);
 

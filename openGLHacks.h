@@ -9,7 +9,7 @@ extern void drawCrosshair();
 
 typedef BOOL(__stdcall* twglSwapBuffers) (HDC hDc);
 
-static twglSwapBuffers owglSwapBuffers;
+extern twglSwapBuffers owglSwapBuffers;
 
 BOOL __stdcall hkwglSwapBuffers(HDC hDc);
 

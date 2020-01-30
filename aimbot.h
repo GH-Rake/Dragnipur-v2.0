@@ -21,7 +21,7 @@ public:
 	void readPlayerData();
 };
 
-static Aimbot aBot;
+extern Aimbot aBot;
 
 bool playerSorter(PlayerClass& lhs, PlayerClass& rhs);
 

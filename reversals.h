@@ -6,15 +6,15 @@
 const int PLAYER_HEIGHT = 5.25f;
 const int HALF_PLAYER_WIDTH = 1.0f;
 
-static int* gameMode = (int*)(0x50F49C);
-static int* numOfPlayers = (int*)(0x50f500);
-static glmatrixf* glmvpmatrix = (glmatrixf*)(0x501AE8);
+extern int* gameMode;
+extern int* numOfPlayers;
+extern glmatrixf* glmvpmatrix;
 
 struct sqr;
 
-static sqr* world = (sqr*)0x50A1F8;
-static int* sfactor = (int*)0x505BB4;
-static int* lastmillis = (int*)0x509EAC;
+extern sqr* world;
+extern int* sfactor;
+extern int* lastmillis;
 
 enum gameModes
 {
@@ -127,8 +127,8 @@ public:
 	bool PlayerClass::IsVisible();
 };
 
-static playerent* localPlayer = *(playerent**)0x50F4F4;
-static std::vector <PlayerClass> playerVector;
+extern playerent* localPlayer;
+extern std::vector <PlayerClass> playerVector;
 
 struct traceresult_s
 {

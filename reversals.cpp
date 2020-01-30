@@ -1,5 +1,13 @@
 #include "reversals.h"
 
+int* gameMode = (int*)(0x50F49C);
+int* numOfPlayers = (int*)(0x50f500);
+glmatrixf* glmvpmatrix = (glmatrixf*)(0x501AE8);
+sqr* world = (sqr*)0x50A1F8;
+int* sfactor = (int*)0x505BB4;
+int* lastmillis = (int*)0x509EAC;
+playerent* localPlayer = *(playerent**)0x50F4F4;
+
 PlayerClass::PlayerClass() {}
 
 //playerVector constructor
