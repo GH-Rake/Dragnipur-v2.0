@@ -116,3 +116,18 @@ Learning About Game Hacking
 Question: Can I use this codebase to learn about game hacking?
 
 Answer: Absolutely, this codebase can serve as a valuable resource for learning about game hacking. It demonstrates several key concepts, such as memory manipulation and OpenGL rendering.
+
+Glossary
+--------
+
+1.  Aimbot: A software tool used in first-person shooting games that allows the player to automatically aim at the enemy players. It gives the player an unfair advantage as it requires no skill to aim and shoot the enemies.
+
+2.  ESP (Extra Sensory Perception): In gaming terms, ESP stands for Extra Sensory Perception. This feature allows the player to perceive details that would be otherwise hidden in the game. For example, it can reveal enemy locations, their health status, and other critical information.
+
+3.  OpenGL: OpenGL (Open Graphics Library) is a cross-language, cross-platform application programming interface (API) for rendering 2D and 3D vector graphics. The API is typically used to interact with a graphics processing unit (GPU), to achieve hardware-accelerated rendering.
+
+4.  Memory Manipulation: In the context of game hacking, memory manipulation is the practice of altering a game's memory to change certain aspects of the game. This can include things like player health, ammo count, position, and more.
+
+5.  Reverse Engineering: Reverse engineering is the process of understanding how something works by examining its components and their interactions. In game hacking, this often involves understanding how the game code works in order to exploit it.
+
+6.  Visual Studio: Visual Studio is an integrated development environment (IDE) from Microsoft. It is used to develop computer programs, as well as websites, web apps, web services, and mobile apps. Visual Studio uses Microsoft software development platforms such as Windows API, Windows Forms, Windows Presentation Foundation, Windows Store, and Microsoft Silverlight.
